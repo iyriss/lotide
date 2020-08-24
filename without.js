@@ -1,4 +1,7 @@
 const eqArrays = function(firstArr, secondArr) {
+  if (firstArr.length !== secondArr.length) {
+    return false;
+  }
   for (let i = 0; i < firstArr.length; i++) {
     if (firstArr[i] !== secondArr[i]) {
       return false;
@@ -15,25 +18,37 @@ const assertArraysEqual = function(expectedArray, resultArray) {
   }
 };
 
-const without = function(sourceArr, itemsToRemove) {
-  let newArr = '';
-  for (let i = 0; i < sourceArr.length; i++) {
-    for (let j = 0; j < itemsToRemove.length; j++) {
-      if (sourceArr[i] === itemsToRemove[j]) {
-        newArr += sourceArr.splice(i, 1);
-        //console.log(sourceArr, "test")
-      }
-    }
-  }
-  return sourceArr;
-};
 
-console.log(without([1, 2, 3], [1])) // => [2, 3]
-console.log(without(["1", "2", "3"], [1, 2, "3"])) // => ["1", "2"]
-console.log(without([1, 2, 3], [0])) 
-console.log(without(["7", "8", "8"], ["0","89"])) 
+const without = function(source, itemsToRemove) {
+  let myNewArr = [];
+  for (const element in source) {
+    for (const item in itemsToRemove) {
+      if (typeof source[element] === typeof itemsToRemove[item]) {
+      if (source[element] !== itemsToRemove[item])
+          myNewArr.push(source[element])
+        } 
+      } 
+  } return myNewArr;
+}
 
+/*
+const without = function(source, itemsToRemove) { 
+  let myNewArr = []; 
+  for (const element in source) { 
+    if (!itemsToRemove.includes(source[element])) { 
+      myNewArr.push(source[element]) 
+    } 
+  } 
+  return myNewArr;
+}
+
+*/
+//assertArraysEqual(without([1, 2, 3], [1]), [2,3]) // => [2, 3]
+assertArraysEqual(without(["1", "2", "3"], [1, 2, "3"]), ["1", "2"]) // => ["1", "2"]
+assertArraysEqual(without(["7", "8", "8"], ["5", "8"]), ["7"]);
+/*
 const words = ["hello", "world", "lighthouse"];
 without(words, ["lighthouse"]); // no need to capture return value for this test case
 // Make sure the original array was not altered by the without function
 assertArraysEqual(words, ["hello", "world", "lighthouse"]);
+*/
