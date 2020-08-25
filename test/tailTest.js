@@ -1,6 +1,6 @@
 
 const assert = require('chai').assert;
-const tail = require('../tail')
+const {tail} = require('../index')
 
 // Test Case: Check the original array
 //const words = ["Yo Yo", "Lighthouse", "Labs"];
